@@ -9,10 +9,11 @@
 a{
 	text-decoration:none;
 	}
-h1{
+#titulo{
 	font-family:"regular", Arial, Helvetica, sans-serif;
 	color:#002c62;
 	margin-bottom:20px;
+	text-align: center;
 	}
 p{
 	font-family:"regular", Arial, Helvetica, sans-serif;
