@@ -1,0 +1,21 @@
+#um img{
+    border:#000 1px solid;
+    position:absolute;
+    z-index:1;
+    }
+#dois img{
+    border:#000 1px solid;
+    position:absolute;
+    top:40px;
+    left:40px;
+    z-index:2;
+    }
+#tres img{
+    border:#000 1px solid;
+    position:absolute;
+    top:70px;
+    left:70px;
+    z-index:3;
+    }
+
+/*Modifique os valores do z-index entre 1,2 e 3 em cada um dos exemplos cima e perceba o resultado.*/

@@ -1,0 +1,41 @@
+/*css*/
+*{
+	margin:0;
+	padding:0;
+}
+
+#central{
+	width:1000px;
+	height:38px;
+	background-color:#003d99;
+	margin:0 auto;
+	text-align:center;
+	position:relative;
+}
+
+ul{
+	list-style-type:none;
+	
+}
+
+li{
+	display:inline-block;
+	padding:10px 40px 10px 40px; /*Permite a criação do botão para o menu*/
+}
+
+li:hover{
+	background-color:#4d94ff;
+}
+
+a{
+	text-decoration:none;
+	color:#fff;
+	font-family:Arial, Helvetica, sans-serif;
+	
+}
+
+a:hover{
+	text-decoration:none;
+	color:#003d99;
+	font-family:Arial, Helvetica, sans-serif;
+}

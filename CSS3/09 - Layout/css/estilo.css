@@ -1,0 +1,57 @@
+/*CSS*/
+
+*{
+	margin:0;
+	padding:0;
+	}
+
+body{
+	background-color:#09F; /* cor do fundo da página*/
+	}
+
+#principal{
+	width:460px;
+	height:700px;
+	margin:0 auto;
+	padding:20px;
+	background-image:url("../imagens/imagem.jpg"); /*insere imagem na div*/
+	}
+
+h1{
+	text-align:center;
+	font-family:"Arial Black", Gadget, sans-serif;
+	color:#06C;
+	margin-bottom:20px;
+	}
+
+p{
+	font-family:Arial, Helvetica, sans-serif;
+	color:#333;
+	text-align:justify;
+	margin-bottom:50px;
+	}
+
+a{	
+	font-family:"Courier New", Courier, monospace, "Kozuka Gothic Pro H";
+	font-size:36px;
+	font-weight:bold;
+	color:#fff;
+	text-decoration:none;
+	background-color:#06c;
+	transition: background-color 0.3s, color 0.3s;
+	padding:10px 50px;
+	}
+
+a:hover{
+	background-color:#FC0;
+	color:#06c;
+	}
+
+ul{
+	display: flex; /* Define o contêiner como um flexbox */
+	flex-direction: row; /* Alinha os itens em uma linha horizontal */
+	flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha se necessário */
+	justify-content: center; /* Centraliza os itens dentro do contêiner */
+	gap: 15px; /* Adiciona um espaço de 15px entre os itens */
+	}
+	

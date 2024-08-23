@@ -1,0 +1,38 @@
+body{
+    text-align:center;
+    }
+    
+#main{
+    width:400px;
+    height:200px;
+    border:#060 3px solid;
+    margin:0 auto; 
+    position:relative;
+    }
+
+#box1{
+    width:50px;
+    height:50px;
+    background-color:#F00;
+    position:relative; /*Posiciona-se em relação a posição original em que foi criado*/
+    top:20px;
+    left:20px;
+    }
+
+#box2{
+    width:50px;
+    height:50px;
+    background-color:#060;
+    position:absolute;	/*Posiciona-se em relação ao primeiro ancestral posicionado. Retire o position do #main e veja o que ocorre.*/
+    top:20px;
+    right:20px;
+    }
+
+#box3{
+    width:50px;
+    height:50px;
+    background-color:#00F;
+    position:fixed;	/*Posiciona-se em relação a janela do navegador*/
+    bottom:20px;
+    right:20px;
+    }

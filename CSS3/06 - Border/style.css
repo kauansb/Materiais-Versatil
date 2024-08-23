@@ -1,0 +1,16 @@
+#box{
+    width:200px;
+    height:200px;
+    background-color:#0CF;
+    border-style:dashed;	/* Estilo da borda: tracejado */
+    border-color:#00F;		/* Cor da borda */
+    border-width:10px;		/* Largura da borda: grossa */
+}
+
+#box2{
+    width:200px;
+    height:200px;
+    background:#999;
+    border:#333 5px solid;
+    border-radius:5px 20px 10px 40px;	/* Define um raio (arredondamento para os cantos do objeto. Cada valor representa um canto (sup-esq, sup-dir, inf-dir, inf-esq). Poderíamos abreviar para apenas um valor que valeria para os quatro cantos, por exemplo, 10px */
+}

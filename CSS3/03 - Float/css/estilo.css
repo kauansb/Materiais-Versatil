@@ -1,0 +1,18 @@
+/* css */
+
+#box{
+	width:700px; /* Largura no box */
+	padding:20px; /* margin interna geral do box */
+	margin:0 auto; /* centraliza box */
+	background-color:#096; /* cor do box */
+	text-align:justify; /* alinhamento do texto */
+}
+
+p{
+	color:#ffffff; /* cor do parágrafo */
+}
+
+#box img{
+	float:left; /* alinha imagem a esquerda */
+	margin:20px 10px 0px 0px; /* margem entre o texto e a imagem */
+}
