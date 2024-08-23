@@ -6,13 +6,18 @@
 	padding:0px;
 	}
 
+#titulo{
+		font-family:"regular", Arial, Helvetica, sans-serif;
+		color:#002c62;
+		margin-bottom:20px;
+		text-align: center;
+		}
+
 a{
 	text-decoration:none;
 	}
 h1{
 	font-family:"regular", Arial, Helvetica, sans-serif;
-	color:#002c62;
-	margin-bottom:20px;
 	}
 p{
 	font-family:"regular", Arial, Helvetica, sans-serif;
