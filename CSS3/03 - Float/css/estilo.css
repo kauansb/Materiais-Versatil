@@ -15,4 +15,5 @@ p{
 #box img{
 	float:left; /* alinha imagem a esquerda */
 	margin:20px 10px 0px 0px; /* margem entre o texto e a imagem */
+	height: 300px;
 }

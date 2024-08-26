@@ -1,21 +1,30 @@
-#um img{
-    border:#000 1px solid;
-    position:absolute;
-    z-index:1;
-    }
-#dois img{
-    border:#000 1px solid;
-    position:absolute;
-    top:40px;
-    left:40px;
-    z-index:2;
-    }
-#tres img{
-    border:#000 1px solid;
-    position:absolute;
-    top:70px;
-    left:70px;
-    z-index:3;
-    }
+body {
+    display: flex;
+    margin-top: 100px;
+}
 
-/*Modifique os valores do z-index entre 1,2 e 3 em cada um dos exemplos cima e perceba o resultado.*/
+#um img {
+    border: #000 1px solid;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    z-index: 1; /* Com "1" Este elemento ficará abaixo dos outros */
+}
+
+#dois img {
+    border: #000 1px solid;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 2; /* Com "2" Este elemento ficará no meio */
+}
+
+#tres img {
+    border: #000 1px solid;
+    position: absolute;
+    top: 70px;
+    left: 70px;
+    z-index: 3; /* Com "3" Este elemento ficará acima dos outros */
+}
+
+/* Modifique os valores do z-index entre 1, 2 e 3 nos exemplos acima e observe o resultado. */

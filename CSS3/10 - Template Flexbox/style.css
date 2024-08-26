@@ -1,0 +1,50 @@
+/* Resetando as margens e preenchimentos padrão do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo para o corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Cor de fundo da página */
+    display: flex;
+    flex-direction: column; /* Disposição vertical dos elementos principais (header, main, footer) */
+    min-height: 100vh; /* A altura mínima da página é 100% da altura da viewport */
+}
+
+/* Estilo para o cabeçalho */
+.header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0; /* Espaçamento interno do cabeçalho */
+}
+
+/* Estilo para o conteúdo principal */
+.main-content {
+    display: flex; /* Ativando o modelo Flexbox no contêiner principal */
+    justify-content: space-around; /* Distribuindo colunas com espaço igual ao redor */
+    align-items: flex-start; /* Alinhando as colunas ao topo do contêiner */
+    flex: 1; /* Faz com que o conteúdo principal ocupe o espaço disponível */
+    padding: 20px;
+}
+
+/* Estilo para as colunas */
+.column {
+    background-color: #000000;
+    color: white;
+    padding: 20px;
+    width: 30%; /* Cada coluna ocupa 30% da largura do contêiner */
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Estilo para o rodapé */
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0; /* Espaçamento interno do rodapé */
+}

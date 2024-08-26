@@ -4,42 +4,39 @@
 *{
 	margin:0px;
 	padding:0px;
-	}
+}
 
 a{
 	text-decoration:none;
-	}
+}
 h1{
 	font-family:"regular", Arial, Helvetica, sans-serif;
 	color:#002c62;
 	margin-bottom:20px;
-	}
+}
 p{
 	font-family:"regular", Arial, Helvetica, sans-serif;
 	font-size:14px;
 	text-align:justify;
-	}
+}
 img{
 	border:none;
-	}
+}
 @font-face{
 	font-family:regular;
 	src:url(../font/regular.ttf);
-	}
+}
 	
 /*=====TOPO=======================================*/
 #topo{
 	width:100%;
 	height:100px;
-	
-	}
-	
+}
 .logo{
 	width:1000px;
 	height:100px;
 	margin:0 auto;
 }
-	
 .logo img{
 	display: block;
 	margin: 0 auto;
@@ -51,7 +48,6 @@ nav{
 	height:50px;
 	text-align:center;
 	background: #004694;
-	
 	}
 nav a{
 	color:#FFF;
@@ -65,7 +61,6 @@ nav a:hover{
 nav .ativo{
 	color:#ac9e5e;
 	}
-	
 /*=====CONTAINER=======================================*/
 #container{
 	width:1000px;
@@ -80,7 +75,6 @@ nav .ativo{
 	border-radius:10px;
 	border:1px gray solid;
 }
-
 /*=====FOOTER=======================================*/
 footer{
 	position:absolute;
@@ -94,7 +88,6 @@ footer{
 	width:1000px;
 	margin:0 auto;
 }
-
 #t_rodape p{
 	width:350px;
 	position:relative;
@@ -103,11 +96,9 @@ footer{
 	color:#FFF;
 	text-align:center;
 }
-
 #t_rodape a{
 	color:white;
 }
-
 #t_rodape a:hover{
 	color:#ac9e5e;
 }
