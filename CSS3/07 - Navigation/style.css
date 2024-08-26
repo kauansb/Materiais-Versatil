@@ -1,0 +1,53 @@
+/* Estilo global para o corpo da página */
+body {
+    font-family: Arial, sans-serif; /* Fonte usada no texto */
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para o cabeçalho */
+header {
+    background-color: #333; /* Cor de fundo do cabeçalho */
+    color: white; /* Cor do texto no cabeçalho */
+    padding: 20px; /* Espaçamento interno do cabeçalho */
+    text-align: center; /* Centraliza o texto */
+}
+
+/* Estilo para a lista de navegação */
+nav ul {
+    list-style-type: none; /* Remove marcadores da lista */
+    margin: 0; /* Remove margens */
+    padding: 0; /* Remove preenchimento */
+    display: flex; /* Exibe os itens em linha */
+    justify-content: center; /* Centraliza os itens na tela */
+}
+
+/* Estilo para cada item da lista de navegação */
+nav ul li {
+    margin: 0 15px; /* Espaçamento entre os itens */
+}
+
+/* Estilo para os links de navegação */
+nav ul li a {
+    color: white; /* Cor do texto dos links */
+    text-decoration: none; /* Remove sublinhado dos links */
+    font-weight: bold; /* Deixa o texto em negrito */
+    padding: 10px 15px; /* Espaçamento interno dos links */
+    display: block; /* Faz o link ocupar todo o espaço do item */
+}
+
+/* Efeito ao passar o mouse sobre os links */
+nav ul li a:hover {
+    background-color: #555; /* Cor de fundo ao passar o mouse */
+    border-radius: 5px; /* Arredonda os cantos do fundo */
+}
+
+/* Estilo para o conteúdo principal */
+main {
+    padding: 20px; /* Espaçamento interno ao redor do conteúdo */
+}
+
+/* Estilo para cada seção dentro do main */
+section {
+    margin: 20px 0 300px 0; /* Espaçamento externo acima e abaixo de cada seção */
+}
