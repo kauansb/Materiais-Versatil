@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interativo</title>
+    <style>
+        .pergunta {
+            margin-bottom: 20px;
+        }
+        .resultado {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz de JavaScript</h1>
+    <!-- Formulário do quiz -->
+    <form id="quizForm">
+        <!-- Pergunta 1 -->
+        <div class="pergunta">
+            <p>1. Qual a linguagem usada para criar interatividade em páginas web?</p>
+            <input type="radio" name="p1" value="HTML"> HTML<br>
+            <input type="radio" name="p1" value="CSS"> CSS<br>
+            <input type="radio" name="p1" value="JavaScript"> JavaScript
+        </div>
+        <!-- Pergunta 2 -->
+        <div class="pergunta">
+            <p>2. Qual tag é usada para criar um parágrafo em HTML?</p>
+            <input type="radio" name="p2" value="div"> div<br>
+            <input type="radio" name="p2" value="p"> p<br>
+            <input type="radio" name="p2" value="h1"> h1
+        </div>
+        <!-- Pergunta 3 -->
+        <div class="pergunta">
+            <p>3. Qual propriedade CSS é usada para mudar a cor de fundo?</p>
+            <input type="radio" name="p3" value="color"> color<br>
+            <input type="radio" name="p3" value="background-color"> background-color<br>
+            <input type="radio" name="p3" value="font-size"> font-size
+        </div>
+        <!-- Botão para enviar as respostas -->
+        <button type="button" onclick="verificarRespostas()">Enviar Respostas</button>
+    </form>
+    <!-- Área para exibir o resultado do quiz -->
+    <div id="resultado" class="resultado"></div>
+
+<!--Link JS-->
+<script src="index.js"></script>
+</body>
+</html>
