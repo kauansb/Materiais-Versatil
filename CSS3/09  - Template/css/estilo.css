@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+/*=====GERAL=======================================*/
+*{
+	margin:0px;
+	padding:0px;
+}
+
+a{
+	text-decoration:none;
+}
+h1{
+	font-family:"regular", Arial, Helvetica, sans-serif;
+	color:#002c62;
+	margin-bottom:20px;
+}
+p{
+	font-family:"regular", Arial, Helvetica, sans-serif;
+	font-size:14px;
+	text-align:justify;
+}
+img{
+	border:none;
+}
+@font-face{
+	font-family:regular;
+	src:url(../font/regular.ttf);
+}
+	
+/*=====TOPO=======================================*/
+#topo{
+	width:100%;
+	height:100px;
+}
+.logo{
+	width:1000px;
+	height:100px;
+	margin:0 auto;
+}
+.logo img{
+	display: block;
+	margin: 0 auto;
+	margin-top:20px;
+}	
+/*=====NAV=======================================*/
+nav{
+	width:100%;
+	height:50px;
+	text-align:center;
+	background: #004694;
+	}
+nav a{
+	color:#FFF;
+	font-family:"regular", Arial, Helvetica, sans-serif;
+	margin:0 35px;
+	line-height:50px;
+	}
+nav a:hover{
+	color:#ac9e5e;
+	}
+nav .ativo{
+	color:#ac9e5e;
+	}
+/*=====CONTAINER=======================================*/
+#container{
+	width:1000px;
+	height:600px;
+	margin:0 auto;
+}
+.box{
+	width:100%;
+	height:100%;
+	margin-top:20px;
+	background-color:#d8d9dd;
+	border-radius:10px;
+	border:1px gray solid;
+}
+/*=====FOOTER=======================================*/
+footer{
+	position:absolute;
+	margin-bottom:0px;
+	margin-top:20px;
+	width:100%;
+	height:140px;
+	background: #004694;
+}
+#rodape{
+	width:1000px;
+	margin:0 auto;
+}
+#t_rodape p{
+	width:350px;
+	position:relative;
+	margin:0 auto;
+	top:40px;
+	color:#FFF;
+	text-align:center;
+}
+#t_rodape a{
+	color:white;
+}
+#t_rodape a:hover{
+	color:#ac9e5e;
+}
