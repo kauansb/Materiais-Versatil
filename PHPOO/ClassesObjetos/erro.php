@@ -11,6 +11,6 @@
     <title>Login Dark/Light Mode</title>
 </head>
 <body>
-    <a href="index.php"><img src="/assets/imgs/tela_erro.png"></a>
+    <a href="index.php"><img src="/assets/img/tela_erro.png"></a>
 </body>
 </html>

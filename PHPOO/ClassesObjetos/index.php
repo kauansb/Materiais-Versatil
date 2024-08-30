@@ -8,17 +8,12 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Classes e Objetos</title>
 </head>
-<body>   
+<body id="telalog">
 <main id="container">
     <form id="login_form" method="post" action="AutenticaUsuario.php">
         <div id="form_header">
-            <h1>Login</h1>
+            <img src="assets/img/logo.png" Versátil TI">
             <i id="mode_icon" class="fa-solid fa-moon"></i>
-        </div>
-        <div id="social_media">
-            <a href="#"><img src="assets/imgs/facebook.png" alt=""></a>
-            <a href="#"><img src="assets/imgs/google.png" alt="Google logo"></a>
-            <a href="#"><img src="assets/imgs/github.png" alt=""></a>
         </div>
         <div id="inputs">
             <div class="input-box">
@@ -30,23 +25,12 @@
                 </label>
             </div>
             <div class="input-box">
-                <label for="email">E-mail
-                    <div class="input-field">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="email" name="email">
-                    </div>
-                </label>
-            </div>
-            <div class="input-box">
                 <label for="senha">senha
                     <div class="input-field">
                         <i class="fa-solid fa-key"></i>
                         <input type="senha" id="senha" name="senha">
                     </div>
                 </label>
-                <div id="forgot_senha">
-                    <a href="#">Forgot your senha?</a>
-                </div>
             </div>
         </div>
         <button type="submit" id="login_button">Login</button>

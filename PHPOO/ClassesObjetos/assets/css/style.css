@@ -15,8 +15,8 @@
     --color-purple-100: #a855f7;
     --color-purple-200: #bf46ef;
 
-    /* Gradient */
-    --color-gradient: linear-gradient(90deg, var(--color-purple-50), var(--color-purple-100), var(--color-purple-200));
+    /* Gradient 
+    --color-gradient: linear-gradient(90deg, var(--color-purple-50), var(--color-purple-100), var(--color-purple-200));*/
 }
 
 /* General */
@@ -25,6 +25,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+#telalog {
+    background-image: url('/PHPOO/ClassesObjetos/assets/img/tela_log.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100vh; 
 }
 
 #container {
@@ -151,6 +160,7 @@
     font-weight: bold;
     font-size: 18px;
     cursor: pointer;
+    box-shadow: #bf46ef;
 }
 
 #login_button:hover {
