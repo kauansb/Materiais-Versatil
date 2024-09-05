@@ -21,7 +21,7 @@ class ConstrutorArmadura {
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            if ($username == 'admin' && $password == 'password123') {
+            if ($username == 'admin' && $password == '123') {
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = 'admin';
 
