@@ -1,0 +1,33 @@
+/* assets/css/veiculos.css */
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background-color: #f9f9f9;
+}
+
+.veiculo {
+    background-color: #ffffff;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    margin: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.veiculo h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.veiculo p {
+    font-size: 1.2em;
+    color: #555;
+}
