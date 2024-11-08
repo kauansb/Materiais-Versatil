@@ -16,6 +16,15 @@ try {
     exit();
 }
 
+$usuario = new Usuario();
+$usuarios = $usuario->listar();
+
+foreach ($usuarios as $user) {
+    echo "ID: " . htmlspecialchars($user['id']) . "<br>";
+    echo "Nome: " . htmlspecialchars($user['nome']) . "<br>";
+    echo "Email: " . htmlspecialchars($user['email']) . "<br><br>";
+}
+
 // Inicia a sessão para poder acessar variáveis de sessão
 session_start();
 ?>
