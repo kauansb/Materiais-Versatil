@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-class AutenticaUsuario {
+class Logout {
     public function destruirSessao() {
         session_unset();
         session_destroy();
@@ -10,6 +10,6 @@ class AutenticaUsuario {
     }
 }
 
-$objAutentica = new AutenticaUsuario();
+$objAutentica = new Logout();
 $objAutentica->destruirSessao();
 ?>

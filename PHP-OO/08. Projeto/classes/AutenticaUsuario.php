@@ -20,7 +20,8 @@ class AutenticaUsuario {
     public function iniciarSessao() {
         $_SESSION['usuario'] = [
             'login' => $this->login,
-            'autenticado' => true
+            'autenticado' => true,
+            'ultima_atividade' => time(),
         ];
     }
 

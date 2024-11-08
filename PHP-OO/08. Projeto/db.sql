@@ -13,6 +13,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
 INSERT INTO usuarios (nome, email) VALUES 
 ('Kauan', 'kauan@versatil.com'),
 ('ED', 'ED@versatil.com'),
-('Fernanda', 'fernanda@versatil.com')
+('Fernanda', 'fernanda@versatil.com'),
 ('Kamila', 'Kamila@versatil.com');
 
