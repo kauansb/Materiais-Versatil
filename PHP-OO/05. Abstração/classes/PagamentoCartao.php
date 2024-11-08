@@ -12,8 +12,9 @@ class PagamentoCartao extends Pagamento {
 
     // Implementação específica para pagamento com cartão
     public function processarPagamento() {
-        return "Pagamento de R$ " . number_format($this->valor, 2, ',', '.') . 
+        return "Pagamento de R$ " . number_format($this->getValor(), 2, ',', '.') . 
                " processado com cartão de crédito (número: ****" . substr($this->numeroCartao, -4) . ")";
     }
 }
 ?>
+

@@ -12,7 +12,7 @@ class PagamentoPix extends Pagamento {
 
     // Implementação específica para pagamento via Pix
     public function processarPagamento() {
-        return "Pagamento de R$ " . number_format($this->valor, 2, ',', '.') . 
+        return "Pagamento de R$ " . number_format($this->getValor(), 2, ',', '.') . 
                " processado via Pix (chave: " . $this->chavePix . ")";
     }
 }
