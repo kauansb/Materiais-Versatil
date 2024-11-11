@@ -10,13 +10,11 @@ class AutenticaUsuario {
         $this->senha = $senha;
     }
 
-    // Valida credenciais de acesso
     public function validarCredenciais() {
         // Comparar credenciais com valores salvos de forma segura
         return hash_equals($this->login, 'admin') && hash_equals($this->senha, '123');
     }
 
-    // Inicia a sessão de usuário com segurança
     public function iniciarSessao() {
         $_SESSION['usuario'] = [
             'login' => $this->login,
@@ -24,7 +22,6 @@ class AutenticaUsuario {
         ];
     }
 
-    // Redirecionamento seguro
     public function redirecionar($url) {
         if ($url) {
             header("Location: $url");
