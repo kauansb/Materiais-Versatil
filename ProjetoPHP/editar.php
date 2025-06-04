@@ -1,7 +1,7 @@
 <?php
 // Esses arquivos garantem que o usuário esteja autenticado e que a conexão com o banco esteja disponível.
 include 'proteger.php'; 
-include 'db/conexao.php';
+include 'conexao.php';
 
 // Verifica se o ID do usuário foi passado via GET
 $id = $_GET['id'];

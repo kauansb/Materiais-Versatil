@@ -1,5 +1,5 @@
 <?php include 'proteger.php'; ?>
-<?php include 'db/conexao.php'; ?>
+<?php include 'conexao.php'; ?>
 <?php
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
