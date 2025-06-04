@@ -1,16 +1,22 @@
 <?php 
-include 'db/conexao.php';
-include 'proteger.php';
+include 'db/conexao.php';   // Conecta com o banco
+include 'proteger.php';     // Verifica se o usuário está autenticado
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Recebe os dados enviados pelo formulário
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $senha = $_POST['senha'];
+
+    // Criptografa a senha com segurança
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
+    // Prepara e executa a inserção no banco de dados
     $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, telefone, senha) VALUES (?, ?, ?, ?)");
     $stmt->execute([$nome, $email, $telefone, $senha_hash]);
+
+    // Redireciona de volta para a página principal
     header('Location: index.php');
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-include 'db/conexao.php';
+include 'db/conexao.php'; // Faz a conexão com o banco de dados
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

@@ -1,12 +1,15 @@
-<?php 
+<?php
+// Esses arquivos garantem que o usuário esteja autenticado e que a conexão com o banco esteja disponível.
 include 'proteger.php'; 
 include 'db/conexao.php';
 
+// Verifica se o ID do usuário foi passado via GET
 $id = $_GET['id'];
 $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
 $stmt->execute([$id]);
-$usuario = $stmt->fetch();
+$usuario = $stmt->fetch(); // Guardamos os dados no array $usuario.
 
+// Quando o formulário é enviado, capturamos os dados e usamos UPDATE para alterar no banco de dados.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
