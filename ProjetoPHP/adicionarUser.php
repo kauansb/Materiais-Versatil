@@ -1,6 +1,6 @@
 <?php 
 include 'conexao.php';   // Conecta com o banco
-include 'proteger.php';     // Verifica se o usuário está autenticado
+// include 'proteger.php';     // Verifica se o usuário está autenticado
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recebe os dados enviados pelo formulário
