@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $usuario = $stmt->fetch();
   if ($usuario && password_verify($senha, $usuario['senha'])) {
     $_SESSION['usuario'] = $usuario['nome'];
-    header('Location: painel.php');
+    header('Location: index.php');
   } else {
     $erro = "E-mail ou senha inválidos!";
   }
