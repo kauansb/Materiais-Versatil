@@ -1,5 +1,5 @@
+DROP DATABASE IF EXISTS crud_db;
 CREATE DATABASE crud_db DEFAULT CHARACTER SET utf8mb4;
-
 USE crud_db;
 
 CREATE TABLE usuarios (
@@ -7,5 +7,11 @@ CREATE TABLE usuarios (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL DEFAULT '',
-    telefone VARCHAR(20)
+    telefone VARCHAR(20),
+    data_nascimento DATE DEFAULT NULL,
+    genero ENUM('masculino', 'feminino', 'outro') DEFAULT 'outro',
+    perfil ENUM('admin','comum') NOT NULL DEFAULT 'comum',
+    status TINYINT(1) NOT NULL DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

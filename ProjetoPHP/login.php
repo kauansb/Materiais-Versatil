@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $usuario = $stmt->fetch();
   if ($usuario && password_verify($senha, $usuario['senha'])) {
     $_SESSION['usuario'] = $usuario['nome'];
-    header('Location: index.php');
+    header('Location: painel.php');
   } else {
     $erro = "E-mail ou senha inválidos!";
   }
@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </head>
 <body class="container mt-5">
 <h2>Login</h2>
+<!-- Mensagens de erro e sucesso serão exibidas abaixo: -->
 <?php if (!empty($erro)): ?><div class="alert alert-danger"><?= $erro ?></div><?php endif; ?>
 <form method="POST">
   <div class="mb-3"><label>E-mail</label><input type="email" name="email" class="form-control" required></div>

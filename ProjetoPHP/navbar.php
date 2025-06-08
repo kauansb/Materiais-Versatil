@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.php">Usuários</a>
+                    <a class="nav-link active" href="painel.php">Usuários</a>
                 </li>
             </ul>
             <div class="d-flex">

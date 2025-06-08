@@ -1,46 +1,52 @@
 <?php
-include 'conexao.php'; // Faz a conexão com o banco de dados
+if (session_status() === PHP_SESSION_NONE) session_start();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Lista de Usuários</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Versátil - Sistema de Usuários</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <?php include 'navbar.php'; ?>
-  <div class="container mt-5">
-    <h1 class="mb-4">Bem-vindo ao Painel</h1>
-    <h1>Usuários</h1>
-    <a href="adicionarUser.php" class="btn btn-success mb-3">Novo Usuário</a>
-    <table class="table table-bordered">
-      <thead>
-        <tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Ações</th></tr>
-      </thead>
-      <tbody>
-      <?php
-        $stmt = $pdo->query("SELECT * FROM usuarios");
-        while ($row = $stmt->fetch()):
-      ?>
-        <tr>
-          <td><?= $row['nome'] ?></td>
-          <td><?= $row['email'] ?></td>
-          <td><?= $row['telefone'] ?></td>
-          <td>
-            <a href="editar.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
-            <a href="excluir.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza?')">Excluir</a>
-          </td>
-        </tr>
-      <?php endwhile; ?>
-      <?php if ($stmt->rowCount() == 0): ?>
-        <tr>
-          <td colspan="4" class="text-center">Nenhum usuário encontrado.</td>
-        </tr>
-      </tbody>
-      <?php endif; ?>
-    </table>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include 'navbar.php'; ?>
+    <div class="container mt-5">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">Bem-vindo ao Sistema Versátil</h1>
+                <p class="col-md-8 fs-4">
+                    Gerencie usuários de forma simples e eficiente.<br>
+                    Utilize o menu para acessar as funcionalidades do sistema.
+                </p>
+                <?php if (isset($_SESSION['usuario'])): ?>
+                    <a href="painel.php" class="btn btn-primary btn-lg">Ir para o Painel</a>
+                <?php else: ?>
+                    <a href="login.php" class="btn btn-outline-primary btn-lg">Entrar</a>
+                    <a href="cadastrar.php" class="btn btn-outline-primary btn-lg">Cadastre-se</a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-6">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Cadastro de Usuários</h5>
+                        <p class="card-text">Adicione, edite e exclua usuários facilmente.</p>
+                        <a href="painel.php" class="btn btn-outline-secondary">Acessar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Busca Rápida</h5>
+                        <p class="card-text">Encontre usuários pelo nome ou email.</p>
+                        <a href="painel.php" class="btn btn-outline-secondary">Buscar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
