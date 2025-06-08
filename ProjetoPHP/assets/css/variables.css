@@ -1,0 +1,17 @@
+:root {
+    --background-color: #ededf0;
+    --card-bg: #fff;
+    --text-color: #222;
+    --text-muted: #b3b3b3;
+    --primary: #1886ff;
+    --input-bg: #f7f7f7;
+    --input-border: #e0e0e0;
+    --placeholder: #bdbdbd;
+    --link: #1886ff;
+
+    --font-family-title: 'Roboto', sans-serif;
+    --font-family-body: 'Helvetica', sans-serif;
+
+    --border-radius: 20px;
+    --box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
