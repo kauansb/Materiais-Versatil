@@ -1,5 +1,10 @@
 <?php
 include './db/conexao.php';
+if (session_status() === PHP_SESSION_NONE) session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
+    exit;
+}
 
 $busca = $_GET['busca'] ?? '';
 if ($busca) {
@@ -8,66 +13,78 @@ if ($busca) {
 } else {
     $stmt = $pdo->query("SELECT * FROM usuarios");
 }
+$usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Lista de Usuários</title>
+  <title>Cadastro de Clientes</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
   <?php include 'navbar.php'; ?>
-  <div class="container mt-5">
-    <div class="container d-flex justify-content-center align-items-center">
-      <h1>Cadastro de Clientes</h1>
-      <h2 class="mb-4">Bem-vindo <bold> <?= $_SESSION['usuario'] ?></h1>
-      <form method="GET" class="mb-3 d-flex">
-        <input type="text" name="busca" class="form-control me-2" placeholder="Buscar por nome ou email" value="<?= htmlspecialchars($_GET['busca'] ?? '') ?>">
-        <button type="submit" class="btn btn-outline-primary">Buscar</button>
-      </form>
+  <div class="container-fluid px-0" style="max-width:1200px; margin:0 auto;">
+    <h1 class="main-title">Cadastro de Clientes</h1>
+    <div class="welcome">
+      Bem-vindo <strong><?= htmlspecialchars($_SESSION['usuario']) ?></strong>
     </div>
-
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Nome</th><th>Email</th><th>Telefone</th><th>Data Nasc.</th><th>Gênero</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-      <?php
-        $stmt = $pdo->query("SELECT * FROM usuarios");
-        while ($row = $stmt->fetch()):
-      ?>
-        <tr>
-          <td><?= $row['nome'] ?></td>
-          <td><?= $row['email'] ?></td>
-          <td><?= $row['telefone'] ?></td>
-          <td><?= $row['data_nascimento'] ?></td>
-          <td><?= ucfirst($row['genero']) ?></td>
-          <td>
-            <?php if ($row['status']): ?>
-              <span class="badge bg-success">Ativo</span>
-            <?php else: ?>
-              <span class="badge bg-secondary">Inativo</span>
-            <?php endif; ?>
-          </td>
-          <td>
-            <a href="editar.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
-            <a href="excluir.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza?')">Excluir</a>
-          </td>
-        </tr>
-      <?php endwhile; ?>
-      <?php if ($stmt->rowCount() == 0): ?>
-        <tr>
-          <td colspan="7" class="text-center">Nenhum usuário encontrado.</td>
-        </tr>
-      </tbody>
-      <?php endif; ?>
-    </table>
+    <form method="GET" class="search-form mb-4" role="search">
+      <input type="text" name="busca" class="form-control" placeholder="Pesquisar" value="<?= htmlspecialchars($_GET['busca'] ?? '') ?>" aria-label="Pesquisar">
+      <button type="submit" class="btn" title="Buscar" aria-label="Buscar">
+        <span class="bi bi-search" aria-hidden="true"></span>
+      </button>
+    </form>
+    <div class="table-container">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th style="width:24px;">#</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th>Data de Nascimento</th>
+            <th>Gênero</th>
+            <th>Status</th>
+            <th style="width:120px;">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php if (count($usuarios)): ?>
+          <?php foreach ($usuarios as $i => $row): ?>
+            <tr>
+              <td class="row-handle">⋮</td>
+              <td><?= htmlspecialchars($row['nome']) ?></td>
+              <td><?= htmlspecialchars($row['email']) ?></td>
+              <td><?= htmlspecialchars($row['telefone'] ?? '-') ?></td>
+              <td><?= !empty($row['data_nascimento']) && $row['data_nascimento'] !== '0000-00-00' ? date('d/m/Y', strtotime($row['data_nascimento'])) : '-' ?></td>
+              <td><?= htmlspecialchars($row['genero'] ?? '-') ?></td>
+              <td>
+                <?php if (isset($row['status'])): ?>
+                  <span class="badge <?= $row['status'] ? 'bg-success' : 'bg-secondary' ?>">
+                    <?= $row['status'] ? 'Ativo' : 'Inativo' ?>
+                  </span>
+                <?php else: ?>
+                  -
+                <?php endif; ?>
+              </td>
+              <td class="table-actions">
+                <a href="editar.php?id=<?= $row['id'] ?>">Editar</a>
+                <a href="excluir.php?id=<?= $row['id'] ?>" class="btn-danger" onclick="return confirm('Tem certeza?')">Excluir</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="5" class="text-center">Nenhum usuário encontrado.</td>
+          </tr>
+        <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
   </div>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
