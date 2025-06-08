@@ -1,6 +1,5 @@
 <?php
-include 'conexao.php'; // Faz a conexão com o banco de dados
-include 'proteger.php'; // Protege a página para usuários autenticados
+include './db/conexao.php';
 
 $busca = $_GET['busca'] ?? '';
 if ($busca) {
@@ -20,20 +19,19 @@ if ($busca) {
 <body>
   <?php include 'navbar.php'; ?>
   <div class="container mt-5">
-    <h1 class="mb-4">Bem-vindo ao Painel</h1>
-    <h1>Usuários</h1>
+    <div class="container d-flex justify-content-center align-items-center">
+      <h1>Cadastro de Clientes</h1>
+      <h2 class="mb-4">Bem-vindo <bold> <?= $_SESSION['usuario'] ?></h1>
+      <form method="GET" class="mb-3 d-flex">
+        <input type="text" name="busca" class="form-control me-2" placeholder="Buscar por nome ou email" value="<?= htmlspecialchars($_GET['busca'] ?? '') ?>">
+        <button type="submit" class="btn btn-outline-primary">Buscar</button>
+      </form>
+    </div>
 
-    <form method="GET" class="mb-3 d-flex" style="max-width:400px;">
-      <input type="text" name="busca" class="form-control me-2" placeholder="Buscar por nome ou email" value="<?= htmlspecialchars($_GET['busca'] ?? '') ?>">
-      <button type="submit" class="btn btn-outline-primary">Buscar</button>
-    </form>
-    
-    <a href="cadastrar.php" class="btn btn-primary mb-3">Cadastrar Novo Usuário</a>
     <table class="table table-bordered">
       <thead>
         <tr>
           <th>Nome</th><th>Email</th><th>Telefone</th><th>Data Nasc.</th><th>Gênero</th>
-          <th>Perfil</th>
           <th>Status</th>
           <th>Ações</th>
         </tr>
@@ -49,7 +47,6 @@ if ($busca) {
           <td><?= $row['telefone'] ?></td>
           <td><?= $row['data_nascimento'] ?></td>
           <td><?= ucfirst($row['genero']) ?></td>
-          <td><?= ucfirst($row['perfil']) ?></td>
           <td>
             <?php if ($row['status']): ?>
               <span class="badge bg-success">Ativo</span>

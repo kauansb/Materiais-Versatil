@@ -10,8 +10,8 @@ CREATE TABLE usuarios (
     telefone VARCHAR(20),
     data_nascimento DATE DEFAULT NULL,
     genero ENUM('masculino', 'feminino', 'outro') DEFAULT 'outro',
-    perfil ENUM('admin','comum') NOT NULL DEFAULT 'comum',
     status TINYINT(1) NOT NULL DEFAULT 1,
+    user_type ENUM('admin', 'user') NOT NULL DEFAULT 'user',
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );

@@ -61,3 +61,107 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+nav {
+    background: var(--nav-bg);
+    padding: 16px;
+    box-shadow: var(--box-shadow);
+}
+
+/* painel */
+
+    .main-title {
+      font-size: 2.2rem;
+      font-weight: 400;
+      text-align: center;
+      margin-top: 32px;
+      margin-bottom: 0;
+    }
+    .welcome {
+      text-align: center;
+      font-size: 1.25rem;
+      margin-bottom: 18px;
+      margin-top: 10px;
+      color: #222;
+    }
+    .welcome strong {
+      font-weight: 700;
+      color: #222;
+    }
+    .search-form {
+      max-width: 320px;
+      margin: 0 auto 32px auto;
+      display: flex;
+      gap: 0;
+    }
+    .search-form input {
+      border-radius: 4px 0 0 4px;
+      border-right: none;
+      background: #fff;
+    }
+    .search-form button {
+      border-radius: 0 4px 4px 0;
+      border-left: none;
+      background: #0074e4;
+      color: #fff;
+      font-weight: 500;
+      padding: 0 16px;
+    }
+    .table-container {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #0001;
+      padding: 0 24px 24px 24px;
+      margin-top: 16px;
+    }
+    table {
+      margin-top: 0;
+      background: transparent;
+    }
+    thead tr {
+      border-bottom: 2px solid #bbb;
+    }
+    th, td {
+      vertical-align: middle !important;
+      background: transparent !important;
+    }
+    tbody tr:nth-child(even) {
+      background: #f7f7f7 !important;
+    }
+    .table-actions a {
+      font-size: 15px;
+      margin-left: 8px;
+      color: #0074e4;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .table-actions a.btn-danger {
+      color: #dc3545 !important;
+      background: none !important;
+      border: none;
+      padding: 0;
+    }
+    .table-actions a:hover {
+      text-decoration: underline;
+    }
+    .table th, .table td {
+      border: none;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .table th {
+      color: #222;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .table td {
+      color: #444;
+      font-size: 0.98rem;
+    }
+    .table .row-handle {
+      color: #bbb;
+      font-size: 1.2rem;
+      text-align: center;
+      width: 24px;
+      cursor: grab;
+      user-select: none;
+    }
