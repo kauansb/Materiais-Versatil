@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cadastrar Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../assets/css/main.css"/>
+</head>
+<body>
+    <main class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-5 w-100" style="max-width:900px;">
+            <h1 class="login-title mb-4 mt-2">
+                <span class="muted">Cadastrar</span><span>Cliente</span>
+            </h1>
+            <form class="mt-4" action="/cadastrar" method="POST" autocomplete="off">
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" placeholder="Nome" name="nome" required>
+                    </div>
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <input type="email" class="form-control" placeholder="E-mail" name="email" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="tel" class="form-control" placeholder="Telefone" name="telefone">
+                    </div>
+                </div>
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
+                        <label class="me-2 mb-0" for="sexo">Sexo:</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sexo" id="masculino" value="masculino" checked>
+                            <label class="form-check-label" for="masculino">Masculino</label>
+                        </div>
+                        <div class="form-check form-check-inline ms-2">
+                            <input class="form-check-input" type="radio" name="sexo" id="feminino" value="feminino">
+                            <label class="form-check-label" for="feminino">Feminino</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="me-2 mb-0" for="cidade">Cidade/UF</label>
+                        <select class="form-control" id="cidade" name="cidade">
+                            <option selected disabled>Please select</option>
+                            <option value="sp">São Paulo/SP</option>
+                            <option value="rj">Rio de Janeiro/RJ</option>
+                            <option value="df">Distrito Federal/DF</option>
+                            <!-- Adicione mais opções conforme necessário -->
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-4 align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <label class="mb-1" for="senha">Senha</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" placeholder="Password" id="senha" name="senha" required>
+                            <span class="input-group-text bg-transparent border-0" style="cursor:pointer;" id="toggleSenha">
+                                <i class="bi bi-eye" style="color: var(--placeholder);"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="mb-1" for="repetir_senha">Repetir Senha</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" placeholder="Password" id="repetir_senha" name="repetir_senha" required>
+                            <span class="input-group-text bg-transparent border-0" style="cursor:pointer;" id="toggleRepetirSenha">
+                                <i class="bi bi-eye" style="color: var(--placeholder);"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" style="font-size:1.1rem;">Cadastrar</button>
+                    <div class="mt-3">
+                        <a href="login.html" style="color: var(--primary);">Voltar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+    <!-- Bootstrap Icons CDN para o ícone de olho -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.querySelector(`#${iconId} i`);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("bi-eye");
+                icon.classList.add("bi-eye-slash");
+            } else {
+                input.type = "password";
+                icon.classList.remove("bi-eye-slash");
+                icon.classList.add("bi-eye");
+            }
+        }
+        document.getElementById('toggleSenha').addEventListener('click', function() {
+            togglePassword('senha', 'toggleSenha');
+        });
+        document.getElementById('toggleRepetirSenha').addEventListener('click', function() {
+            togglePassword('repetir_senha', 'toggleRepetirSenha');
+        });
+    </script>
+</body>
+</html>
