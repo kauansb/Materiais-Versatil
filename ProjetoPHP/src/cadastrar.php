@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, telefone, senha, data_nascimento, genero, status, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->execute([$nome, $email, $telefone, $senha_hash, $data_nascimento, $genero, $status, $user_type]);
+            session_start();
+            $_SESSION['sucesso'] = 'Usuário cadastrado com sucesso!';
             header('Location: index.php');
             exit;
         } catch (PDOException $e) {
@@ -111,6 +113,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/cadastrar.js"></script>           
+    <script src="../assets/js/main.js"></script>          
 </body>
 </html>

@@ -15,6 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $erro = "E-mail ou senha inválidos!";
   }
 }
+
+$sucesso = '';
+if (!empty($_SESSION['sucesso'])) {
+  $sucesso = $_SESSION['sucesso'];
+  unset($_SESSION['sucesso']);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="container mt-5">
 
 <!-- Mensagens de erro e sucesso serão exibidas abaixo: -->
+<?php if (!empty($sucesso)): ?><div class="alert alert-success"><?= $sucesso ?></div><?php endif; ?>
 <?php if (!empty($erro)): ?><div class="alert alert-danger"><?= $erro ?></div><?php endif; ?>
 
   <main class="container d-flex justify-content-center align-items-center vh-100">
@@ -64,5 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
     </div>
   </main>
+
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>

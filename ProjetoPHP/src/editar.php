@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $stmt = $pdo->prepare("UPDATE usuarios SET nome=?, email=?, telefone=?, data_nascimento=?, genero=?, user_type=?, status=? WHERE id=?");
         $stmt->execute([$nome, $email, $telefone, $data_nascimento, $genero, $user_type, $status, $id]);
+        session_start();
+        $_SESSION['sucesso'] = 'Usuário alterado com sucesso!';
         header('Location: painel.php');
         exit;
     } catch (PDOException $e) {

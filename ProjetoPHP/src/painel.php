@@ -14,6 +14,12 @@ if ($busca) {
     $stmt = $pdo->query("SELECT * FROM usuarios");
 }
 $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sucesso = '';
+if (!empty($_SESSION['sucesso'])) {
+    $sucesso = $_SESSION['sucesso'];
+    unset($_SESSION['sucesso']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,6 +31,9 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
   <?php include 'navbar.php'; ?>
+  <?php if (!empty($sucesso)): ?>
+    <div class="alert alert-success text-center"><?= $sucesso ?></div>
+  <?php endif; ?>
   <div class="container-fluid px-0" style="max-width:1200px; margin:0 auto;">
     <h1 class="main-title">Cadastro de Clientes</h1>
     <div class="welcome">
@@ -107,6 +116,6 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/painel.js"></script>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
