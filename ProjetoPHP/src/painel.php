@@ -71,7 +71,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
               </td>
               <td class="table-actions">
                 <a href="editar.php?id=<?= $row['id'] ?>">Editar</a>
-                <a href="excluir.php?id=<?= $row['id'] ?>" class="btn-danger" onclick="return confirm('Tem certeza?')">Excluir</a>
+                <a href="#" class="btn-danger btn-excluir" data-id="<?= $row['id'] ?>">Excluir</a>
               </td>
             </tr>
           <?php endforeach; ?>
@@ -84,7 +84,39 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
       </table>
     </div>
   </div>
+
+<!-- Modal de Confirmação -->
+<div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="modalExcluirLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalExcluirLabel">Confirmar Exclusão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja excluir este registro?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="#" id="btn-confirm-excluir" class="btn btn-danger">Excluir</a>
+      </div>
+    </div>
+  </div>
+</div>
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.querySelectorAll('.btn-excluir').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var id = this.getAttribute('data-id');
+        document.getElementById('btn-confirm-excluir').href = 'excluir.php?id=' + id;
+        var modal = new bootstrap.Modal(document.getElementById('modalExcluir'));
+        modal.show();
+      });
+    });
+</script>
 </body>
 </html>

@@ -16,11 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefone = $_POST['telefone'];
     $data_nascimento = !empty($_POST['data_nascimento']) ? $_POST['data_nascimento'] : null;
     $genero = $_POST['genero'];
-    $perfil = $_POST['perfil'];
+    $user_type = $_POST['user_type'];
     $status = isset($_POST['status']) ? 1 : 0;
 
-    $stmt = $pdo->prepare("UPDATE usuarios SET nome=?, email=?, telefone=?, data_nascimento=?, genero=?, perfil=?, status=? WHERE id=?");
-    $stmt->execute([$nome, $email, $telefone, $data_nascimento, $genero, $perfil, $status, $id]);
+    $stmt = $pdo->prepare("UPDATE usuarios SET nome=?, email=?, telefone=?, data_nascimento=?, genero=?, user_type=?, status=? WHERE id=?");
+    $stmt->execute([$nome, $email, $telefone, $data_nascimento, $genero, $user_type, $status, $id]);
     header('Location: painel.php');
 }
 ?>
@@ -61,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="mb-3">
       <label class="form-label">Perfil</label>
-      <select name="perfil" class="form-control">
-        <option value="comum" <?= $usuario['perfil']=='comum'?'selected':'' ?>>Comum</option>
-        <option value="admin" <?= $usuario['perfil']=='admin'?'selected':'' ?>>Admin</option>
+      <select name="user_type" class="form-control">
+        <option value="comum" <?= $usuario['user_type']=='comum'?'selected':'' ?>>Comum</option>
+        <option value="admin" <?= $usuario['user_type']=='admin'?'selected':'' ?>>Admin</option>
       </select>
     </div>
     <div class="mb-3 form-check">
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label class="form-check-label">Ativo</label>
     </div>
     <button type="submit" class="btn btn-primary">Atualizar</button>
-    <a href="index.php" class="btn btn-secondary">Cancelar</a>
+    <a href="painel.php" class="btn btn-secondary">Cancelar</a>
   </form>
 
 </body>
