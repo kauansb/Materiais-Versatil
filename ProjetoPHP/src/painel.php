@@ -89,17 +89,20 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="modalExcluirLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalExcluirLabel">Confirmar Exclusão</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body">
-        Tem certeza que deseja excluir este registro?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <a href="#" id="btn-confirm-excluir" class="btn btn-danger">Excluir</a>
-      </div>
+      <form method="POST" action="excluir.php" id="formExcluir">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalExcluirLabel">Confirmar Exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          Tem certeza que deseja excluir este registro?
+          <input type="hidden" name="id" id="inputExcluirId">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-danger">Excluir</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -112,11 +115,11 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         var id = this.getAttribute('data-id');
-        document.getElementById('btn-confirm-excluir').href = 'excluir.php?id=' + id;
+        document.getElementById('inputExcluirId').value = id;
         var modal = new bootstrap.Modal(document.getElementById('modalExcluir'));
         modal.show();
       });
     });
-</script>
+  </script>
 </body>
 </html>
