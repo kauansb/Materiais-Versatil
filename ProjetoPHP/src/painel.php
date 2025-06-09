@@ -40,7 +40,6 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <table class="table align-middle">
         <thead>
           <tr>
-            <th style="width:24px;">#</th>
             <th>Nome</th>
             <th>E-mail</th>
             <th>Telefone</th>
@@ -54,7 +53,6 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php if (count($usuarios)): ?>
           <?php foreach ($usuarios as $i => $row): ?>
             <tr>
-              <td class="row-handle">⋮</td>
               <td><?= htmlspecialchars($row['nome']) ?></td>
               <td><?= htmlspecialchars($row['email']) ?></td>
               <td><?= htmlspecialchars($row['telefone'] ?? '-') ?></td>
@@ -109,17 +107,6 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    document.querySelectorAll('.btn-excluir').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        var id = this.getAttribute('data-id');
-        document.getElementById('inputExcluirId').value = id;
-        var modal = new bootstrap.Modal(document.getElementById('modalExcluir'));
-        modal.show();
-      });
-    });
-  </script>
+  <script src="../assets/js/painel.js"></script>
 </body>
 </html>

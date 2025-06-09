@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if (!empty($erro)): ?>
                 <div class="alert alert-danger text-center"><?= $erro ?></div>
             <?php endif; ?>
-            <form class="mt-4" method="POST" autocomplete="off">
+            <form class="mt-4" method="POST" autocomplete="off"> 
                 <div class="row mb-3">
                     <div class="col-12">
                         <input type="text" class="form-control mb-3" placeholder="Nome" name="nome" required value="<?= htmlspecialchars($usuario['nome']) ?>">
