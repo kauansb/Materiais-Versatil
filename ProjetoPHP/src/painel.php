@@ -1,10 +1,6 @@
 <?php
 include './db/conexao.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('Location: login.php');
-    exit;
-}
 
 $busca = $_GET['busca'] ?? '';
 if ($busca) {
