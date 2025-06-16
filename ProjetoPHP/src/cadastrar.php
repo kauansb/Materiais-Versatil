@@ -1,35 +1,42 @@
 <?php 
 include './db/conexao.php';   // Conecta com o banco
+session_start();
 
 $erro = '';
+$cadastroSucesso = false;
+
+// Recebe os dados enviados pelo formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recebe os dados enviados pelo formulário
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-    $senha = $_POST['senha'];
-    $repetir_senha = $_POST['repetir_senha'];
+    $nome          = trim($_POST['nome'] ?? '');
+    $email         = trim($_POST['email'] ?? '');
+    $telefone      = trim($_POST['telefone'] ?? '');
+    $senha         = $_POST['senha'] ?? '';
+    $repetirSenha  = $_POST['repetir_senha'] ?? '';
     $data_nascimento = !empty($_POST['data_nascimento']) ? $_POST['data_nascimento'] : null; // Data de nascimento é opcional
     $genero = $_POST['genero'];
-    $user_type = 'user'; // Define o perfil como 'comum' por padrão
-    $status = 1; // Define o status como ativo (1) por padrão
 
-    // Validação de senha
-    if ($senha !== $repetir_senha) {
-        $erro = 'As senhas não coincidem!';
+    // Validações básicas
+    if (empty($nome) || empty($email) || empty($senha) || empty($repetirSenha)) {
+        $erro = 'Por favor, preencha todos os campos obrigatórios.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erro = 'E-mail inválido.';
+    } elseif ($senha !== $repetirSenha) {
+        $erro = 'As senhas não coincidem.';
     } else {
-        // Criptografa a senha com segurança
-        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-        try {
-            // Prepara e executa a inserção no banco de dados
-            $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, telefone, senha, data_nascimento, genero, status, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$nome, $email, $telefone, $senha_hash, $data_nascimento, $genero, $status, $user_type]);
-            session_start();
-            $_SESSION['msg'] = 'Usuário cadastrado com sucesso!';
-            header('Location: index.php');
-            exit;
-        } catch (PDOException $e) {
-            $erro = 'Erro ao cadastrar: ' . ($e->errorInfo[1] == 1062 ? 'E-mail já cadastrado.' : $e->getMessage());
+        // Verifica se o e-mail já existe
+        $stmt = $pdo->prepare('SELECT COUNT(*) FROM usuarios WHERE email = ?');
+        $stmt->execute([$email]);
+        if ($stmt->fetchColumn() > 0) {
+            $erro = 'E-mail já cadastrado.';
+        } else {
+            // Insere no banco
+            $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare('INSERT INTO usuarios (nome, email, telefone, senha) VALUES (?, ?, ?, ?)');
+            if ($stmt->execute([$nome, $email, $telefone, $senhaHash])) {
+                $cadastroSucesso = true;
+            } else {
+                $erro = 'Falha ao cadastrar. Tente novamente.';
+            }
         }
     }
 }
@@ -42,9 +49,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Cadastrar Cliente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/main.css"/>
 </head>
 <body>
+
+  <!-- Se cadastro foi bem-sucedido, exibe o modal e redireciona após fechar -->
+  <?php if ($cadastroSucesso): ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var modalEl = document.getElementById('modalSucesso');
+      var modal = new bootstrap.Modal(modalEl);
+      modal.show();
+      modalEl.addEventListener('hidden.bs.modal', function() {
+        window.location.href = 'index.php';
+      });
+    });
+  </script>
+  <?php endif; ?>
+
     <main class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card p-5 w-100 mx-auto" style="max-width:900px;">
             <h1 class="login-title mb-4 mt-2">
@@ -69,15 +92,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
                         <label class="me-2 mb-0" for="sexo">Sexo:</label>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sexo" id="masculino" value="masculino" <?= (!isset($_POST['sexo']) || $_POST['sexo'] == 'masculino') ? 'checked' : '' ?>>
+                            <input class="form-check-input" type="radio" name="genero" id="masculino" value="masculino" <?= (!isset($_POST['sexo']) || $_POST['sexo'] == 'masculino') ? 'checked' : '' ?>>
                             <label class="form-check-label" for="masculino">Masculino</label>
                         </div>
                         <div class="form-check form-check-inline ms-2">
-                            <input class="form-check-input" type="radio" name="sexo" id="feminino" value="feminino" <?= (isset($_POST['sexo']) && $_POST['sexo'] == 'feminino') ? 'checked' : '' ?>>
+                            <input class="form-check-input" type="radio" name="genero" id="feminino" value="feminino" <?= (isset($_POST['sexo']) && $_POST['sexo'] == 'feminino') ? 'checked' : '' ?>>
                             <label class="form-check-label" for="feminino">Feminino</label>
                         </div>
                         <div class="form-check form-check-inline ms-2">
-                            <input class="form-check-input" type="radio" name="sexo" id="outro" value="outro" <?= (isset($_POST['sexo']) && $_POST['sexo'] == 'outro') ? 'checked' : '' ?>>
+                            <input class="form-check-input" type="radio" name="genero" id="outro" value="outro" <?= (isset($_POST['sexo']) && $_POST['sexo'] == 'outro') ? 'checked' : '' ?>>
                             <label class="form-check-label" for="outro">Outro</label>
                         </div>
                     </div>
@@ -115,6 +138,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </main>
-  <?php include 'footer.html'; ?>      
+
+    <!-- Modal de Sucesso -->
+    <div class="modal fade" id="modalSucesso" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius:16px;">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body text-center pt-2">
+                    <p class="fs-5 mb-4 mt-2">Cadastro realizado com sucesso!</p>
+                    <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>      
 </body>
 </html>
