@@ -46,9 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <main class="container d-flex justify-content-center align-items-center vh-100">
-        <?php if (!empty($erro)): ?>
-            <div class="alert alert-danger text-center"> <?= $erro ?> </div>
-        <?php endif; ?>
         <div class="card p-5 w-100 mx-auto" style="max-width:900px;">
             <h1 class="login-title mb-4 mt-2">
                 <span class="muted">Cadastrar</span><span>Cliente</span>
