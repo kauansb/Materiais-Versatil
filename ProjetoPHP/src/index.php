@@ -75,6 +75,7 @@ $msg = $_SESSION['msg'] ?? '';
         </p>
     </div>
   </main>
-  <script src="../assets/js/main.js"></script>
+  
+  <?php include 'footer.html'; ?>
 </body>
 </html>
