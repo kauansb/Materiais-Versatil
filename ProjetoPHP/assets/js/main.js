@@ -11,6 +11,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 5000);
 });
 
+// Modal de confirmação para exclusão
+document.querySelectorAll('.btn-excluir').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var id = this.getAttribute('data-id');
+    document.getElementById('inputExcluirId').value = id;
+    var modal = new bootstrap.Modal(document.getElementById('modalExcluir'));
+    modal.show();
+  });
+});
+
+document.getElementById('toggleSenha').addEventListener('click', function() {
+    togglePassword('senha', 'toggleSenha');
+});
+document.getElementById('toggleRepetirSenha').addEventListener('click', function() {
+    togglePassword('repetir_senha', 'toggleRepetirSenha');
+});
+
 // Função para alternar a visibilidade da senha
 function togglePassword(inputId, iconId) {
     const input = document.getElementById(inputId);
@@ -25,20 +43,3 @@ function togglePassword(inputId, iconId) {
         icon.classList.add("bi-eye");
     }
 }
-document.getElementById('toggleSenha').addEventListener('click', function() {
-    togglePassword('senha', 'toggleSenha');
-});
-document.getElementById('toggleRepetirSenha').addEventListener('click', function() {
-    togglePassword('repetir_senha', 'toggleRepetirSenha');
-});
-
-// Modal de confirmação para exclusão
-document.querySelectorAll('.btn-excluir').forEach(function(btn) {
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
-    var id = this.getAttribute('data-id');
-    document.getElementById('inputExcluirId').value = id;
-    var modal = new bootstrap.Modal(document.getElementById('modalExcluir'));
-    modal.show();
-  });
-});
