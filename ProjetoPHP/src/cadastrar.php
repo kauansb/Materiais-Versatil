@@ -1,26 +1,31 @@
-<?php
-include './db/conexao.php'; // Conecta com o banco
+<?php 
+include './db/conexao.php';   // Conecta com o banco
 
 $erro = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Recebe os dados enviados pelo formulário
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $senha = $_POST['senha'];
     $repetir_senha = $_POST['repetir_senha'];
-    $data_nascimento = !empty($_POST['data_nascimento']) ? $_POST['data_nascimento'] : null;
-    $genero = $_POST['sexo'];
-    $status = 1; // Ativo por padrão
-    $user_type = 'user';
+    $data_nascimento = !empty($_POST['data_nascimento']) ? $_POST['data_nascimento'] : null; // Data de nascimento é opcional
+    $genero = $_POST['genero'];
+    $user_type = 'user'; // Define o perfil como 'comum' por padrão
+    $status = 1; // Define o status como ativo (1) por padrão
 
     // Validação de senha
     if ($senha !== $repetir_senha) {
         $erro = 'As senhas não coincidem!';
     } else {
+        // Criptografa a senha com segurança
         $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
         try {
+            // Prepara e executa a inserção no banco de dados
             $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, telefone, senha, data_nascimento, genero, status, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->execute([$nome, $email, $telefone, $senha_hash, $data_nascimento, $genero, $status, $user_type]);
+            session_start();
+            $_SESSION['msg'] = 'Usuário cadastrado com sucesso!';
             header('Location: index.php');
             exit;
         } catch (PDOException $e) {
@@ -40,6 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <main class="container d-flex justify-content-center align-items-center vh-100">
+        <?php if (!empty($erro)): ?>
+            <div class="alert alert-danger text-center"> <?= $erro ?> </div>
+        <?php endif; ?>
         <div class="card p-5 w-100" style="max-width:900px;">
             <h1 class="login-title mb-4 mt-2">
                 <span class="muted">Cadastrar</span><span>Cliente</span>
@@ -111,6 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/cadastrar.js"></script>           
+    <script src="../assets/js/main.js"></script>           
 </body>
 </html>

@@ -1,10 +1,6 @@
 <?php
+include 'proteger.php'; // Protege a página para usuários autenticados
 include './db/conexao.php';
-if (session_status() === PHP_SESSION_NONE) session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('Location: login.php');
-    exit;
-}
 
 $busca = $_GET['busca'] ?? '';
 if ($busca) {
@@ -14,6 +10,9 @@ if ($busca) {
     $stmt = $pdo->query("SELECT * FROM usuarios");
 }
 $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$erro = $_SESSION['erro'] ?? '';
+$msg = $_SESSION['msg'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,6 +24,10 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
   <?php include 'navbar.php'; ?>
+
+  <?php if (!empty($erro)): ?><div class="alert alert-danger" role="alert"><?= htmlspecialchars($erro) ?></div><?php unset($_SESSION['erro']); endif; ?>
+  <?php if (!empty($msg)): ?><div class="alert alert-success" role="alert"><?= htmlspecialchars($msg) ?></div><?php unset($_SESSION['msg']); endif; ?>
+  
   <div class="container-fluid px-0" style="max-width:1200px; margin:0 auto;">
     <h1 class="main-title">Cadastro de Clientes</h1>
     <div class="welcome">
@@ -46,7 +49,9 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Data de Nascimento</th>
             <th>Gênero</th>
             <th>Status</th>
-            <th style="width:120px;">Ações</th>
+            <?php if ($_SESSION['user_type'] == 'admin'): ?>
+              <th>Ações</th>
+            <?php endif; ?>
           </tr>
         </thead>
         <tbody>
@@ -67,15 +72,17 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   -
                 <?php endif; ?>
               </td>
-              <td class="table-actions">
-                <a href="editar.php?id=<?= $row['id'] ?>">Editar</a>
-                <a href="#" class="btn-danger btn-excluir" data-id="<?= $row['id'] ?>">Excluir</a>
-              </td>
+              <?php if ($_SESSION['user_type'] == 'admin'): ?>
+                <td class="table-actions">
+                  <a href="editar.php?id=<?= $row['id'] ?>">Editar</a>
+                  <a href="#" class="btn-danger btn-excluir" data-id="<?= $row['id'] ?>">Excluir</a>
+                </td>
+              <?php endif; ?>
             </tr>
           <?php endforeach; ?>
         <?php else: ?>
           <tr>
-            <td colspan="5" class="text-center">Nenhum usuário encontrado.</td>
+            <td colspan="6" class="text-center">Nenhum usuário encontrado.</td>
           </tr>
         <?php endif; ?>
         </tbody>
@@ -106,7 +113,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/painel.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>

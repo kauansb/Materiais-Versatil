@@ -1,21 +1,26 @@
 <?php
+// Esses arquivos garantem que o usuário esteja autenticado e que a conexão com o banco esteja disponível.
+include 'proteger.php';
+verificarAdmin(); // Função que verifica se o usuário é admin 
 include './db/conexao.php';
 
-// Busca usuário
+// Verifica se o ID do usuário foi passado via GET
 $id = $_GET['id'] ?? null;
 if (!$id) {
     header('Location: painel.php');
     exit;
 }
+
 $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
 $stmt->execute([$id]);
-$usuario = $stmt->fetch();
+$usuario = $stmt->fetch(); // Guardamos os dados no array $usuario.
 if (!$usuario) {
     header('Location: painel.php');
     exit;
 }
 
 $erro = '';
+// Quando o formulário é enviado, capturamos os dados e usamos UPDATE para alterar no banco de dados.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
@@ -28,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $stmt = $pdo->prepare("UPDATE usuarios SET nome=?, email=?, telefone=?, data_nascimento=?, genero=?, user_type=?, status=? WHERE id=?");
         $stmt->execute([$nome, $email, $telefone, $data_nascimento, $genero, $user_type, $status, $id]);
+        $_SESSION['msg'] = 'Usuário atualizado com sucesso!';
         header('Location: painel.php');
         exit;
     } catch (PDOException $e) {

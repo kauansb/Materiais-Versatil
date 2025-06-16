@@ -1,13 +1,16 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-  header('Location: ./index.php');
+  header('Location: index.php');
   exit;
 }
 
-// Verifica se o usuário tem permissão para editar
-if ($_SESSION['usuario'] !== $usuario['nome'] && $_SESSION['user_type'] !== 'admin') {
+// Função para verificar se o usuário é admin
+function verificarAdmin() {
+  if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
+    $_SESSION['erro'] = 'Você não tem permissão para acessar este recurso.';
     header('Location: painel.php');
     exit;
+  }
 }
 ?>

@@ -10,11 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $usuario = $stmt->fetch();
   if ($usuario && password_verify($senha, $usuario['senha'])) {
     $_SESSION['usuario'] = $usuario['nome'];
+    $_SESSION['user_type'] = $usuario['user_type'];
     header('Location: painel.php');
   } else {
     $erro = "E-mail ou senha inválidos!";
   }
 }
+$msg = $_SESSION['msg'] ?? '';
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,10 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="container mt-5">
 
 <!-- Mensagens de erro e sucesso serão exibidas abaixo: -->
-<?php if (!empty($erro)): ?><div class="alert alert-danger"><?= $erro ?></div><?php endif; ?>
-
-  <main class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-5 shadow-sm">
+ <div class="container mt-4">
+    <?php if (!empty($erro)): ?><div class="alert alert-danger"><?= $erro ?></div><?php endif; ?>
+    <?php if (!empty($msg)): ?><div class="alert alert-success text-center"><?= $msg ?></div><?php unset($_SESSION['msg']); endif; ?>
+ </div>
+  <main class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card p-5 shadow-sm w-100" style="max-width: 400px;">
       <h1 class="login-title mb-4 mt-5">
         <span class="muted">Login</span><span>System</span>
       </h1>
@@ -64,5 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </p>
     </div>
   </main>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
