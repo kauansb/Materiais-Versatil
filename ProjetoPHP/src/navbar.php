@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
             <?php if (isset($_SESSION['usuario'])): ?>
                 <a href="logout.php" class="btn btn-danger btn-sm px-3" style="border-radius:6px; font-size:15px; font-weight:400; min-width:56px;">Sair</a>
             <?php else: ?>
-                <a href="login.php" class="btn btn-primary btn-sm px-3" style="border-radius:6px; font-size:15px; font-weight:400; min-width:56px;">Entrar</a>
+                <a href="index.php" class="btn btn-primary btn-sm px-3" style="border-radius:6px; font-size:15px; font-weight:400; min-width:56px;">Entrar</a>
             <?php endif; ?>
         </div>
     </div>
