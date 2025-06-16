@@ -31,10 +31,15 @@ $msg = $_SESSION['msg'] ?? '';
 <body class="container mt-5">
 
 <!-- Mensagens de erro e sucesso serão exibidas abaixo: -->
- <div class="container mt-4">
     <?php if (!empty($erro)): ?><div class="alert alert-danger"><?= $erro ?></div><?php endif; ?>
     <?php if (!empty($msg)): ?><div class="alert alert-success text-center"><?= $msg ?></div><?php unset($_SESSION['msg']); endif; ?>
- </div>
+    <?php if (isset($_SESSION['usuario'])): ?>
+      <div class="alert alert-info text-center">
+        Você já está logado como <strong><?= htmlspecialchars($_SESSION['usuario']) ?></strong>.
+        <a href="painel.php" class="btn btn-primary btn-sm">Ir para o Painel</a>
+      </div>
+    <?php endif; ?>
+
   <main class="container d-flex align-items-center justify-content-center min-vh-100">
     <div class="card p-5 shadow-sm w-100" style="max-width: 400px;">
       <h1 class="login-title mb-4 mt-5">

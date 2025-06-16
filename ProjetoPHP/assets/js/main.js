@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert.remove();
             }, 500);
         });
-    }, 3000);
+    }, 5000);
 });
 
 // Função para alternar a visibilidade da senha

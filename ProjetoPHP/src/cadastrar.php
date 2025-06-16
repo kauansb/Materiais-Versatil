@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (!empty($erro)): ?>
             <div class="alert alert-danger text-center"> <?= $erro ?> </div>
         <?php endif; ?>
-        <div class="card p-5 w-100" style="max-width:900px;">
+        <div class="card p-5 w-100 mx-auto" style="max-width:900px;">
             <h1 class="login-title mb-4 mt-2">
                 <span class="muted">Cadastrar</span><span>Cliente</span>
             </h1>
@@ -109,13 +109,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label class="form-label">Data de Nascimento</label>
                     <input type="date" name="data_nascimento" class="form-control" value="<?= isset($_POST['data_nascimento']) ? htmlspecialchars($_POST['data_nascimento']) : '' ?>">
                 </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary" style="font-size:1.1rem;">Cadastrar</button>
-                    <div class="mt-3">
-                        <a href="index.php" style="color: var(--primary);">Voltar</a>
-                    </div>
+                <div class="mt-3 text-center">
+                    <button type="submit" class="btn btn-primary mt-3" style="font-size:1.1rem;">Cadastrar</button>
                 </div>
             </form>
+            <div class="mt-3 text-center">
+                <a href="index.php">Voltar</a>
+            </div>
         </div>
     </main>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
