@@ -46,9 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $stmt = $pdo->prepare("UPDATE usuarios SET nome=?, email=?, telefone=?, data_nascimento=?, genero=?, user_type=?, status=? WHERE id=?");
             $stmt->execute([$nome, $email, $telefone, $data_nascimento, $genero, $user_type, $status, $id]);
-            $_SESSION['msg'] = 'Usuário atualizado com sucesso!';
-            header('Location: painel.php');
-            exit;
+            $edicaoSucesso = true;
         } catch (PDOException $e) {
             if ($e->errorInfo[1] == 1062) {
                 $erro = 'E-mail já cadastrado.';
@@ -56,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $erro = 'Erro ao atualizar: ' . $e->getMessage();
             }
         }
-    } // end if empty error
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -132,5 +130,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
     </main>
-  <?php include 'footer.html'; ?></body>
+    <!-- Modal de Sucesso Edição -->
+    <div class="modal fade" id="modalSucessoEditar" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius:16px;">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body text-center pt-2">
+                    <p class="fs-5 mb-4 mt-2">Usuário atualizado com sucesso!</p>
+                    <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <?php include 'footer.html'; ?>
+  <!-- Modal de sucesso ao editar -->
+  <?php if (!empty($edicaoSucesso)): ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var modalEl = document.getElementById('modalSucessoEditar');
+      var modal = new bootstrap.Modal(modalEl);
+      modal.show();
+      modalEl.addEventListener('hidden.bs.modal', function() {
+        window.location.href = 'painel.php';
+      });
+    });
+  </script>
+  <?php endif; ?>
+</body>
 </html>
