@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validações básicas
     if (empty($nome) || empty($email) || empty($senha) || empty($repetirSenha)) {
         $erro = 'Por favor, preencha todos os campos obrigatórios.';
-    } elseif (!preg_match('/^\d{10,11}$/', $telefone)) {
+    } elseif (!empty($telefone) && !preg_match('/^\d{10,11}$/', $telefone)) {
         $erro = 'Telefone deve ter 10 a 11 dígitos';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = 'E-mail inválido.';
