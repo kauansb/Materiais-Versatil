@@ -22,27 +22,41 @@ if (!$usuario) {
 $erro = '';
 // Quando o formulário é enviado, capturamos os dados e usamos UPDATE para alterar no banco de dados.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-    $data_nascimento = !empty($_POST['data_nascimento']) ? $_POST['data_nascimento'] : null;
+    $nome = trim($_POST['nome']);
+    $email = trim($_POST['email']);
+    $telefone = trim($_POST['telefone']);
+    $data_nascimento = !empty($_POST['data_nascimento']) ? trim($_POST['data_nascimento']) : null;
     $genero = $_POST['genero'];
     $user_type = $_POST['user_type'];
     $status = isset($_POST['status']) ? 1 : 0;
 
-    try {
-        $stmt = $pdo->prepare("UPDATE usuarios SET nome=?, email=?, telefone=?, data_nascimento=?, genero=?, user_type=?, status=? WHERE id=?");
-        $stmt->execute([$nome, $email, $telefone, $data_nascimento, $genero, $user_type, $status, $id]);
-        $_SESSION['msg'] = 'Usuário atualizado com sucesso!';
-        header('Location: painel.php');
-        exit;
-    } catch (PDOException $e) {
-        if ($e->errorInfo[1] == 1062) {
-            $erro = 'E-mail já cadastrado.';
-        } else {
-            $erro = 'Erro ao atualizar: ' . $e->getMessage();
+    // validações
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erro = 'E-mail inválido.';
+    } elseif (!empty($telefone) && !preg_match('/^\d{10,11}$/', $telefone)) {
+        $erro = 'Telefone inválido.';
+    } elseif (!empty($data_nascimento)) {
+        $d = DateTime::createFromFormat('Y-m-d', $data_nascimento);
+        if (!$d || $d->format('Y-m-d') !== $data_nascimento) {
+            $erro = 'Data de nascimento inválida.';
         }
     }
+
+    if (empty($erro)) {
+        try {
+            $stmt = $pdo->prepare("UPDATE usuarios SET nome=?, email=?, telefone=?, data_nascimento=?, genero=?, user_type=?, status=? WHERE id=?");
+            $stmt->execute([$nome, $email, $telefone, $data_nascimento, $genero, $user_type, $status, $id]);
+            $_SESSION['msg'] = 'Usuário atualizado com sucesso!';
+            header('Location: painel.php');
+            exit;
+        } catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                $erro = 'E-mail já cadastrado.';
+            } else {
+                $erro = 'Erro ao atualizar: ' . $e->getMessage();
+            }
+        }
+    } // end if empty error
 }
 ?>
 <!DOCTYPE html>
