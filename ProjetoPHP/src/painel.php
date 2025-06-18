@@ -2,7 +2,7 @@
 include 'proteger.php'; // Protege a página para usuários autenticados
 include './db/conexao.php';
 
-$busca = $_GET['busca'] ?? '';
+$busca = trim($_GET['busca'] ?? '');
 if ($busca) {
     $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE nome LIKE ? OR email LIKE ?");
     $stmt->execute(["%$busca%", "%$busca%"]);
@@ -58,17 +58,17 @@ $msg = $_SESSION['msg'] ?? '';
         </thead>
         <tbody>
         <?php if (count($usuarios)): ?>
-          <?php foreach ($usuarios as $i => $row): ?>
+          <?php foreach ($usuarios as $i => $usuario): ?>
             <tr>
-              <td><?= htmlspecialchars($row['nome']) ?></td>
-              <td><?= htmlspecialchars($row['email']) ?></td>
-              <td><?= htmlspecialchars($row['telefone'] ?? '-') ?></td>
-              <td><?= !empty($row['data_nascimento']) && $row['data_nascimento'] !== '0000-00-00' ? date('d/m/Y', strtotime($row['data_nascimento'])) : '-' ?></td>
-              <td><?= htmlspecialchars($row['genero'] ?? '-') ?></td>
+              <td><?= htmlspecialchars($usuario['nome']) ?></td>
+              <td><?= htmlspecialchars($usuario['email']) ?></td>
+              <td><?= htmlspecialchars($usuario['telefone'] ?? '-') ?></td>
+              <td><?= !empty($usuario['data_nascimento']) && $usuario['data_nascimento'] !== '0000-00-00' ? date('d/m/Y', strtotime($usuario['data_nascimento'])) : '-' ?></td>
+              <td><?= htmlspecialchars($usuario['genero'] ?? '-') ?></td>
               <td>
-                <?php if (isset($row['status'])): ?>
-                  <span class="badge <?= $row['status'] ? 'bg-success' : 'bg-secondary' ?>">
-                    <?= $row['status'] ? 'Ativo' : 'Inativo' ?>
+                <?php if (isset($usuario['status'])): ?>
+                  <span class="badge <?= $usuario['status'] ? 'bg-success' : 'bg-secondary' ?>">
+                    <?= $usuario['status'] ? 'Ativo' : 'Inativo' ?>
                   </span>
                 <?php else: ?>
                   -
@@ -76,8 +76,8 @@ $msg = $_SESSION['msg'] ?? '';
               </td>
               <?php if ($_SESSION['user_type'] == 'admin'): ?>
                 <td class="table-actions">
-                  <a href="editar.php?id=<?= $row['id'] ?>">Editar</a>
-                  <a href="#" class="btn-danger btn-excluir" data-id="<?= $row['id'] ?>">Excluir</a>
+                  <a href="editar.php?id=<?= $usuario['id'] ?>">Editar</a>
+                  <a href="#" class="btn-danger btn-excluir" data-id="<?= $usuario['id'] ?>">Excluir</a>
                 </td>
               <?php endif; ?>
             </tr>

@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validações básicas
     if (empty($nome) || empty($email) || empty($senha) || empty($repetirSenha)) {
         $erro = 'Por favor, preencha todos os campos obrigatórios.';
+    } elseif (!preg_match('/^\d{10,11}$/', $telefone)) {
+        $erro = 'Telefone deve ter 10 a 11 dígitos';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = 'E-mail inválido.';
     } elseif ($senha !== $repetirSenha) {
@@ -154,7 +156,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/main.js"></script>      
+  <?php include 'footer.html'; ?>
 </body>
 </html>

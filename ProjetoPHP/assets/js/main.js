@@ -1,45 +1,57 @@
-// This script handles the dismissal of alerts after a certain time period
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        document.querySelectorAll('.alert').forEach(function(alert) {
-            alert.style.transition = 'opacity 0.5s';
-            alert.style.opacity = '0';
-            setTimeout(function() {
-                alert.remove();
-            }, 500);
-        });
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Dismiss alerts after 5s
+  const alerts = document.querySelectorAll('.alert');
+  if (alerts.length) {
+    setTimeout(() => {
+      alerts.forEach(alert => {
+        alert.style.transition = 'opacity 0.5s';
+        alert.style.opacity = '0';
+        setTimeout(() => alert.remove(), 500);
+      });
     }, 5000);
-});
+  }
 
-// Modal de confirmação para exclusão
-document.querySelectorAll('.btn-excluir').forEach(function(btn) {
-  btn.addEventListener('click', function(e) {
+  // 2. Toggle de senhas
+  const passwordToggles = [
+    { buttonId: 'toggleSenha', inputId: 'senha' },
+    { buttonId: 'toggleRepetirSenha', inputId: 'repetir_senha' }
+  ];
+
+  passwordToggles.forEach(({ buttonId, inputId }) => {
+    const btn = document.getElementById(buttonId);
+    if (btn) {
+      btn.addEventListener('click', () => togglePassword(inputId, buttonId));
+    }
+  });
+
+  // 3. Confirmação de exclusão (event delegation)
+  document.body.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-excluir');
+    if (!btn) return;
     e.preventDefault();
-    var id = this.getAttribute('data-id');
-    document.getElementById('inputExcluirId').value = id;
-    var modal = new bootstrap.Modal(document.getElementById('modalExcluir'));
-    modal.show();
+
+    const id = btn.getAttribute('data-id');
+    const inputExcluir = document.getElementById('inputExcluirId');
+    const modalEl = document.getElementById('modalExcluir');
+    if (inputExcluir && modalEl) {
+      inputExcluir.value = id;
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
   });
 });
 
-document.getElementById('toggleSenha').addEventListener('click', function() {
-    togglePassword('senha', 'toggleSenha');
-});
-document.getElementById('toggleRepetirSenha').addEventListener('click', function() {
-    togglePassword('repetir_senha', 'toggleRepetirSenha');
-});
+/**
+ * Alterna visibilidade de campo de senha e ícone
+ * @param {string} inputId - ID do input de senha
+ * @param {string} buttonId - ID do botão que contém o ícone
+ */
+function togglePassword(inputId, buttonId) {
+  const input = document.getElementById(inputId);
+  const icon = document.querySelector(`#${buttonId} i`);
+  if (!input || !icon) return;
 
-// Função para alternar a visibilidade da senha
-function togglePassword(inputId, iconId) {
-    const input = document.getElementById(inputId);
-    const icon = document.querySelector(`#${iconId} i`);
-    if (input.type === "password") {
-        input.type = "text";
-        icon.classList.remove("bi-eye");
-        icon.classList.add("bi-eye-slash");
-    } else {
-        input.type = "password";
-        icon.classList.remove("bi-eye-slash");
-        icon.classList.add("bi-eye");
-    }
+  const show = input.type === 'password';
+  input.type = show ? 'text' : 'password';
+  icon.classList.replace(show ? 'bi-eye' : 'bi-eye-slash', show ? 'bi-eye-slash' : 'bi-eye');
 }
